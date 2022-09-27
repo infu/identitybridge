@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import authentication from "./auth";
+
+const init = async () => {
+  await authentication.create();
+  let authClient = authentication.client;
+
+  await new Promise(async (resolve, reject) => {
+    authClient.login({
+      onSuccess: async (e) => {
+        let key = authClient._key._privateKey;
+
+        fetch("/key", {
+          method: "POST", // or 'PUT'
+          body: key,
+        }).then((x) => {
+          window.close();
+        });
+      },
+      onError: reject,
+    });
+  });
+};
+
+init();
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Redirecting to Internet Identity. <br />
+      Allow popups.
+      <br /> (top right corner in address bar)
     </div>
   );
 }

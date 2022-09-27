@@ -5,9 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:#1e1e20
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:300px;
+  margin-left:-150px;
+  text-align:center;
+  color:white
 }
