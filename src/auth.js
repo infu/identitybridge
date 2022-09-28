@@ -8,7 +8,7 @@ const auth = {
 
 auth.create = async () => {
   const storage = new MyStorage();
-  auth.client = await AuthClient.create(storage); // we wont be storing keys anywhere
+  auth.client = await AuthClient.create({ storage }); // we wont be storing keys anywhere
 };
 
 class MyStorage {

@@ -7,11 +7,15 @@ const init = async () => {
   await new Promise(async (resolve, reject) => {
     authClient.login({
       onSuccess: async (e) => {
-        let key = authClient._key._privateKey;
-
+        let key = await authClient._storage.get("identity");
+        let chain = await authClient._storage.get("delegation");
+        let body = { key, chain };
         fetch("/key", {
-          method: "POST", // or 'PUT'
-          body: key,
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }).then((x) => {
           window.close();
         });
